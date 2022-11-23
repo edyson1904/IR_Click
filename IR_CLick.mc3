@@ -132,6 +132,10 @@
          <value>0</value>
       </entry>
       <entry>
+         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="ICD" name="customICS"/>
+         <value>Communicate on PGC3 and PGD3</value>
+      </entry>
+      <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="ICD" name="customMasterSlaveViewerEnable"/>
          <value>enabled</value>
       </entry>
@@ -30629,7 +30633,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RE9"/>
-         <value/>
+         <value>BTN</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name VDD1A"/>
@@ -30957,7 +30961,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RE9"/>
-         <value>disabled</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="anselUserSetRA0"/>
@@ -31349,7 +31353,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet RE9"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet VDD1A"/>
@@ -37565,7 +37569,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="ANSELB"/>
-         <value>156</value>
+         <value>924</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="ANSELC"/>
@@ -38081,11 +38085,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSELB" settingAlias="ANSELB8"/>
-         <value>digital</value>
+         <value>analog</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSELB" settingAlias="ANSELB9"/>
-         <value>digital</value>
+         <value>analog</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSELC" settingAlias="ANSELC0"/>
@@ -42117,7 +42121,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="System Module" registerAlias="FICD"/>
-         <value>32771</value>
+         <value>32769</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="System Module" registerAlias="FOSC"/>
@@ -42213,7 +42217,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="System Module" registerAlias="FICD" settingAlias="ICS"/>
-         <value>PGx1</value>
+         <value>PGx3</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="System Module" registerAlias="FICD" settingAlias="JTAGEN"/>
@@ -42329,11 +42333,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR1" name="actualPeriod"/>
-         <value>0.0005625</value>
+         <value>0.0005615</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR1" name="callBackRate"/>
-         <value>0.0005625</value>
+         <value>0.0005615</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR1" name="clockSourceSelect"/>
@@ -42345,7 +42349,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR1" name="customPR"/>
-         <value>2249</value>
+         <value>2245</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR1" name="inputMode"/>
@@ -42373,7 +42377,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR1" name="requestedPeriod"/>
-         <value>0.0005625</value>
+         <value>0.0005615</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR1" name="tickerFactor"/>
@@ -42489,11 +42493,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="TMR1" registerAlias="PR"/>
-         <value>2249</value>
+         <value>2245</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="TMR1" registerAlias="TCON"/>
-         <value>32768</value>
+         <value>0</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="TMR1" registerAlias="TMR"/>
@@ -42501,7 +42505,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR1" registerAlias="PR" settingAlias="PR"/>
-         <value>2249</value>
+         <value>2245</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR1" registerAlias="TCON" settingAlias="PRWIP"/>
@@ -42533,7 +42537,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR1" registerAlias="TCON" settingAlias="TON"/>
-         <value>enabled</value>
+         <value>disabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR1" registerAlias="TCON" settingAlias="TSIDL"/>
@@ -43770,12 +43774,12 @@
    </tokenMap>
    <generatedFileHashHistoryMap class="java.util.HashMap">
       <entry>
-         <file>mcc_generated_files\pwm_module_features.h</file>
-         <hash>1d0b1cfb4dbf0ba226f6f45ed926b7c8d34a5b79e9c10d3063e048267d9f74f3</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\interrupt_manager.h</file>
          <hash>d337869237ebb1fdae1c255d7324041c170956a1128f00f266ed15c0203dcf03</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\pwm_module_features.h</file>
+         <hash>1d0b1cfb4dbf0ba226f6f45ed926b7c8d34a5b79e9c10d3063e048267d9f74f3</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\system_types.h</file>
@@ -43787,7 +43791,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\system.c</file>
-         <hash>e64535eee1bbaf360e01f7ab83aac556bc92760dcfc403e971485d1e55f75de2</hash>
+         <hash>d67d7d60492a6daaf84b225f3a1bb3ecb74f9e3d057b897890bcda9afe7eac7d</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\clock.h</file>
@@ -43803,7 +43807,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\mcc.h</file>
-         <hash>a2ff3f898e4ce4928ef5107a527a6dbb1e5abeefc1d90e165f9c3693cc4a72b7</hash>
+         <hash>ba8db8455a02ae57a66efb3f2c5c81d4b6590f000eb1b5d0dfd1d3755db6c6fe</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pwm.c</file>
@@ -43835,11 +43839,11 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.h</file>
-         <hash>aa8b081b47dc15176e5bae0f2f89297a322c192d2d3c6d4e8a2352dae6476618</hash>
+         <hash>42b77f06f6f206a07b54079e6e637cf5fadf6b85742c6258df7da739520aac2b</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\tmr1.c</file>
-         <hash>3f8196d423425b74206c03afcbaa43956373bff2c28bcd67b58ebcda85d62ec5</hash>
+         <hash>46f27bc2d9b90dce8483350522461fd60e0887ed09a6cbe6029d7234a9fae9c3</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pwm.h</file>
@@ -43847,7 +43851,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>f276725af27c653d3a6eaf7f250ed86e22c70075ebb196643e97168b94129d5b</hash>
+         <hash>77716ffa2aa9fcf775b1fdea942d63bc06807eb9da0ec327de36deafd29ca8da</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\traps.c</file>

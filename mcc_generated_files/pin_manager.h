@@ -54,6 +54,152 @@
 /**
     Section: Device Pin Macros
 */
+/**
+  @Summary
+    Sets the GPIO pin, RE9, high using LATE9.
+
+  @Description
+    Sets the GPIO pin, RE9, high using LATE9.
+
+  @Preconditions
+    The RE9 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE9 high (1)
+    BTN_SetHigh();
+    </code>
+
+*/
+#define BTN_SetHigh()          (_LATE9 = 1)
+/**
+  @Summary
+    Sets the GPIO pin, RE9, low using LATE9.
+
+  @Description
+    Sets the GPIO pin, RE9, low using LATE9.
+
+  @Preconditions
+    The RE9 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE9 low (0)
+    BTN_SetLow();
+    </code>
+
+*/
+#define BTN_SetLow()           (_LATE9 = 0)
+/**
+  @Summary
+    Toggles the GPIO pin, RE9, using LATE9.
+
+  @Description
+    Toggles the GPIO pin, RE9, using LATE9.
+
+  @Preconditions
+    The RE9 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RE9
+    BTN_Toggle();
+    </code>
+
+*/
+#define BTN_Toggle()           (_LATE9 ^= 1)
+/**
+  @Summary
+    Reads the value of the GPIO pin, RE9.
+
+  @Description
+    Reads the value of the GPIO pin, RE9.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RE9
+    postValue = BTN_GetValue();
+    </code>
+
+*/
+#define BTN_GetValue()         _RE9
+/**
+  @Summary
+    Configures the GPIO pin, RE9, as an input.
+
+  @Description
+    Configures the GPIO pin, RE9, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE9 as an input
+    BTN_SetDigitalInput();
+    </code>
+
+*/
+#define BTN_SetDigitalInput()  (_TRISE9 = 1)
+/**
+  @Summary
+    Configures the GPIO pin, RE9, as an output.
+
+  @Description
+    Configures the GPIO pin, RE9, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE9 as an output
+    BTN_SetDigitalOutput();
+    </code>
+
+*/
+#define BTN_SetDigitalOutput() (_TRISE9 = 0)
 
 /**
     Section: Function Prototypes
