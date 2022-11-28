@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/m18026/MPLABXProjects/IR_CLick.X/mcc_generated_files/system.c</file>
+            <file>file:/C:/Users/m18026/MPLABXProjects/IR_CLick.X/main.c</file>
+            <file>file:/C:/Users/m18026/MPLABXProjects/IR_CLick.X/mcc_generated_files/tmr1.c</file>
+            <file>file:/C:/Users/m18026/MPLABXProjects/IR_CLick.X/mcc_generated_files/pin_manager.h</file>
+            <file>file:/C:/Users/m18026/MPLABXProjects/IR_CLick.X/mcc_generated_files/pwm.h</file>
+            <file>file:/C:/Users/m18026/MPLABXProjects/IR_CLick.X/mcc_generated_files/pwm.c</file>
+            <file>file:/C:/Users/m18026/MPLABXProjects/IR_CLick.X/ir_remote.h</file>
+        </group>
     </open-files>
 </project-private>

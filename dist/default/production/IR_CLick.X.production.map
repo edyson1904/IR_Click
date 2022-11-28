@@ -97,11 +97,11 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x27a           0x3b7  (951)
-.text                        0x47a               0x6a4           0x9f6  (2550)
-.dinit                       0xb1e                0x28            0x3c  (60)
-.text                        0xb46                0x32            0x4b  (75)
+.text                        0x47a               0x726           0xab9  (2745)
+.dinit                       0xba0                0x28            0x3c  (60)
+.text                        0xbc8                0x32            0x4b  (75)
 
-                 Total "program" memory used (bytes):          0xe34  (3636) 1%
+                 Total "program" memory used (bytes):          0xef7  (3831) 1%
 
 
 "data" Memory  [Origin = 0x1000, Length = 0x6000]
@@ -110,9 +110,9 @@ section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .ndata                      0x1000                   0             0x2  (2)
 .nbss                       0x1002                   0             0x4  (4)
-.bss                        0x1006                   0            0x2c  (44)
+.bss                        0x1006                   0            0x2e  (46)
 
-                 Total "data" memory used (bytes):           0x32  (50) <1%
+                 Total "data" memory used (bytes):           0x34  (52) <1%
 
 
 Dynamic Memory Usage
@@ -120,9 +120,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                       0x1032                              0x5fce  (24526)
+stack                       0x1034                              0x5fcc  (24524)
 
-                 Maximum dynamic memory (bytes):         0x5fce  (24526)
+                 Maximum dynamic memory (bytes):         0x5fcc  (24524)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -141,8 +141,8 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00023c                  __psv_init
-                  0x000248                  __data_init_extended
                   0x000248                  __data_init
+                  0x000248                  __data_init_extended
                   0x000306                  __OscillatorFail
                   0x000326                  __StackError
                   0x000348                  __AddressError
@@ -155,92 +155,91 @@ External Symbols in Program Memory (by address):
                   0x000442                  _write
                   0x0004a6                  _TMR1_BitTime_Callback
                   0x0004b6                  _main
-                  0x000562                  _Init_IR_System
-                  0x000582                  _CARRIER_OFF
-                  0x00058e                  _CARRIER_ON
-                  0x00059a                  _send_bit
-                  0x000606                  _SEND_1
-                  0x00060c                  _SEND_0
-                  0x000612                  _RESET_GetCause
-                  0x000736                  _RESET_CauseClearAll
-                  0x00073e                  _PWM_Initialize
-                  0x0007bc                  _PWM_SetGenerator1InterruptHandler
-                  0x0007ce                  _PWM_EventA_Tasks
-                  0x0007e8                  _PWM_EventB_Tasks
-                  0x000802                  _PWM_EventC_Tasks
-                  0x00081c                  _PWM_EventD_Tasks
-                  0x000836                  _PWM_EventE_Tasks
-                  0x000850                  _PWM_EventF_Tasks
-                  0x000864                  _UART2_Initialize
-                  0x000894                  _UART2_Read
-                  0x0008b2                  _UART2_Write
-                  0x0008c8                  _UART2_IsRxReady
-                  0x0008dc                  _UART2_IsTxReady
-                  0x0008fc                  _UART2_IsTxDone
-                  0x000914                  _UART2_StatusGet
-                  0x00092e                  _UART2_Enable
-                  0x00093a                  _UART2_Disable
-                  0x000946                  _TMR1_Initialize
-                  0x000968                  _TMR1_Period16BitSet
-                  0x00097a                  _TMR1_Period16BitGet
-                  0x000982                  _TMR1_Counter16BitSet
-                  0x000994                  _TMR1_Counter16BitGet
-                  0x0009a2                  _TMR1_SetInterruptHandler
-                  0x0009b2                  _TMR1_Start
-                  0x0009c2                  _TMR1_Stop
-                  0x0009cc                  _TMR1_GetElapsedThenClear
-                  0x0009e4                  _TMR1_SoftwareCounterGet
-                  0x0009f0                  _TMR1_SoftwareCounterClear
-                  0x0009fc                  _PIN_MANAGER_Initialize
-                  0x000a7a                  _CLOCK_Initialize
-                  0x000ad0                  _CLOCK_AuxPllLockStatusGet
-                  0x000b06                  _SYSTEM_Initialize
-                  0x000b46                  _INTERRUPT_Initialize
+                  0x000600                  _Init_IR_System
+                  0x000620                  _CARRIER_OFF
+                  0x00062c                  _CARRIER_ON
+                  0x000638                  _SEND_1
+                  0x000666                  _SEND_0
+                  0x000694                  _RESET_GetCause
+                  0x0007b8                  _RESET_CauseClearAll
+                  0x0007c0                  _PWM_Initialize
+                  0x00083e                  _PWM_SetGenerator1InterruptHandler
+                  0x000850                  _PWM_EventA_Tasks
+                  0x00086a                  _PWM_EventB_Tasks
+                  0x000884                  _PWM_EventC_Tasks
+                  0x00089e                  _PWM_EventD_Tasks
+                  0x0008b8                  _PWM_EventE_Tasks
+                  0x0008d2                  _PWM_EventF_Tasks
+                  0x0008e6                  _UART2_Initialize
+                  0x000916                  _UART2_Read
+                  0x000934                  _UART2_Write
+                  0x00094a                  _UART2_IsRxReady
+                  0x00095e                  _UART2_IsTxReady
+                  0x00097e                  _UART2_IsTxDone
+                  0x000996                  _UART2_StatusGet
+                  0x0009b0                  _UART2_Enable
+                  0x0009bc                  _UART2_Disable
+                  0x0009c8                  _TMR1_Initialize
+                  0x0009ea                  _TMR1_Period16BitSet
+                  0x0009fc                  _TMR1_Period16BitGet
+                  0x000a04                  _TMR1_Counter16BitSet
+                  0x000a16                  _TMR1_Counter16BitGet
+                  0x000a24                  _TMR1_SetInterruptHandler
+                  0x000a34                  _TMR1_Start
+                  0x000a44                  _TMR1_Stop
+                  0x000a4e                  _TMR1_GetElapsedThenClear
+                  0x000a66                  _TMR1_SoftwareCounterGet
+                  0x000a72                  _TMR1_SoftwareCounterClear
+                  0x000a7e                  _PIN_MANAGER_Initialize
+                  0x000afc                  _CLOCK_Initialize
+                  0x000b52                  _CLOCK_AuxPllLockStatusGet
+                  0x000b88                  _SYSTEM_Initialize
+                  0x000bc8                  _INTERRUPT_Initialize
                   0x02bf00                  __FSEC.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x000582                  _CARRIER_OFF
-                  0x00058e                  _CARRIER_ON
-                  0x000ad0                  _CLOCK_AuxPllLockStatusGet
-                  0x000a7a                  _CLOCK_Initialize
-                  0x000b46                  _INTERRUPT_Initialize
-                  0x000562                  _Init_IR_System
-                  0x0009fc                  _PIN_MANAGER_Initialize
-                  0x0007ce                  _PWM_EventA_Tasks
-                  0x0007e8                  _PWM_EventB_Tasks
-                  0x000802                  _PWM_EventC_Tasks
-                  0x00081c                  _PWM_EventD_Tasks
-                  0x000836                  _PWM_EventE_Tasks
-                  0x000850                  _PWM_EventF_Tasks
-                  0x00073e                  _PWM_Initialize
-                  0x0007bc                  _PWM_SetGenerator1InterruptHandler
-                  0x000736                  _RESET_CauseClearAll
-                  0x000612                  _RESET_GetCause
-                  0x00060c                  _SEND_0
-                  0x000606                  _SEND_1
-                  0x000b06                  _SYSTEM_Initialize
+                  0x000620                  _CARRIER_OFF
+                  0x00062c                  _CARRIER_ON
+                  0x000b52                  _CLOCK_AuxPllLockStatusGet
+                  0x000afc                  _CLOCK_Initialize
+                  0x000bc8                  _INTERRUPT_Initialize
+                  0x000600                  _Init_IR_System
+                  0x000a7e                  _PIN_MANAGER_Initialize
+                  0x000850                  _PWM_EventA_Tasks
+                  0x00086a                  _PWM_EventB_Tasks
+                  0x000884                  _PWM_EventC_Tasks
+                  0x00089e                  _PWM_EventD_Tasks
+                  0x0008b8                  _PWM_EventE_Tasks
+                  0x0008d2                  _PWM_EventF_Tasks
+                  0x0007c0                  _PWM_Initialize
+                  0x00083e                  _PWM_SetGenerator1InterruptHandler
+                  0x0007b8                  _RESET_CauseClearAll
+                  0x000694                  _RESET_GetCause
+                  0x000666                  _SEND_0
+                  0x000638                  _SEND_1
+                  0x000b88                  _SYSTEM_Initialize
                   0x0004a6                  _TMR1_BitTime_Callback
-                  0x000994                  _TMR1_Counter16BitGet
-                  0x000982                  _TMR1_Counter16BitSet
-                  0x0009cc                  _TMR1_GetElapsedThenClear
-                  0x000946                  _TMR1_Initialize
-                  0x00097a                  _TMR1_Period16BitGet
-                  0x000968                  _TMR1_Period16BitSet
-                  0x0009a2                  _TMR1_SetInterruptHandler
-                  0x0009f0                  _TMR1_SoftwareCounterClear
-                  0x0009e4                  _TMR1_SoftwareCounterGet
-                  0x0009b2                  _TMR1_Start
-                  0x0009c2                  _TMR1_Stop
-                  0x00093a                  _UART2_Disable
-                  0x00092e                  _UART2_Enable
-                  0x000864                  _UART2_Initialize
-                  0x0008c8                  _UART2_IsRxReady
-                  0x0008fc                  _UART2_IsTxDone
-                  0x0008dc                  _UART2_IsTxReady
-                  0x000894                  _UART2_Read
-                  0x000914                  _UART2_StatusGet
-                  0x0008b2                  _UART2_Write
+                  0x000a16                  _TMR1_Counter16BitGet
+                  0x000a04                  _TMR1_Counter16BitSet
+                  0x000a4e                  _TMR1_GetElapsedThenClear
+                  0x0009c8                  _TMR1_Initialize
+                  0x0009fc                  _TMR1_Period16BitGet
+                  0x0009ea                  _TMR1_Period16BitSet
+                  0x000a24                  _TMR1_SetInterruptHandler
+                  0x000a72                  _TMR1_SoftwareCounterClear
+                  0x000a66                  _TMR1_SoftwareCounterGet
+                  0x000a34                  _TMR1_Start
+                  0x000a44                  _TMR1_Stop
+                  0x0009bc                  _UART2_Disable
+                  0x0009b0                  _UART2_Enable
+                  0x0008e6                  _UART2_Initialize
+                  0x00094a                  _UART2_IsRxReady
+                  0x00097e                  _UART2_IsTxDone
+                  0x00095e                  _UART2_IsTxReady
+                  0x000916                  _UART2_Read
+                  0x000996                  _UART2_StatusGet
+                  0x000934                  _UART2_Write
                   0x000348                  __AddressError
                   0x00043e                  __DefaultInterrupt
                   0x02bf00                  __FSEC.sec
@@ -256,7 +255,6 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x0004b6                  _main
-                  0x00059a                  _send_bit
                   0x000442                  _write
 
 Memory Configuration
@@ -431,7 +429,7 @@ __FBTSEQ
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x574a
+.debug_info       0x000000       0x574d
  *(.debug_info)
  .debug_info      0x000000        0xa43 build/default/production/mcc_generated_files/uart2.o
  .debug_info      0x000a43        0x487 build/default/production/mcc_generated_files/reset.o
@@ -442,10 +440,10 @@ __FBTSEQ
  .debug_info      0x0022d0        0xbdf build/default/production/mcc_generated_files/system.o
  .debug_info      0x002eaf       0x1321 build/default/production/mcc_generated_files/pwm.o
  .debug_info      0x0041d0        0x88f build/default/production/mcc_generated_files/tmr1.o
- .debug_info      0x004a5f        0xceb build/default/production/main.o
+ .debug_info      0x004a5f        0xcee build/default/production/main.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0xa3b
+.debug_abbrev     0x000000        0xa39
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x131 build/default/production/mcc_generated_files/uart2.o
  .debug_abbrev    0x000131         0xf6 build/default/production/mcc_generated_files/reset.o
@@ -457,9 +455,9 @@ __FBTSEQ
  .debug_abbrev    0x000658          0x1 build/default/production/mcc_generated_files/mcc.o
  .debug_abbrev    0x000659        0x10f build/default/production/mcc_generated_files/pwm.o
  .debug_abbrev    0x000768        0x163 build/default/production/mcc_generated_files/tmr1.o
- .debug_abbrev    0x0008cb        0x170 build/default/production/main.o
+ .debug_abbrev    0x0008cb        0x16e build/default/production/main.o
 
-.debug_line       0x000000        0xd24
+.debug_line       0x000000        0xd37
  *(.debug_line)
  .debug_line      0x000000        0x156 build/default/production/mcc_generated_files/uart2.o
  .debug_line      0x000156        0x155 build/default/production/mcc_generated_files/reset.o
@@ -471,9 +469,9 @@ __FBTSEQ
  .debug_line      0x0008b9         0x1a build/default/production/mcc_generated_files/mcc.o
  .debug_line      0x0008d3        0x17e build/default/production/mcc_generated_files/pwm.o
  .debug_line      0x000a51        0x153 build/default/production/mcc_generated_files/tmr1.o
- .debug_line      0x000ba4        0x180 build/default/production/main.o
+ .debug_line      0x000ba4        0x193 build/default/production/main.o
 
-.debug_frame      0x000000        0x96c
+.debug_frame      0x000000        0x95a
  *(.debug_frame)
  .debug_frame     0x000000        0x118 build/default/production/mcc_generated_files/uart2.o
  .debug_frame     0x000118        0x118 build/default/production/mcc_generated_files/reset.o
@@ -484,7 +482,7 @@ __FBTSEQ
  .debug_frame     0x000490         0x62 build/default/production/mcc_generated_files/system.o
  .debug_frame     0x0004f2        0x1d8 build/default/production/mcc_generated_files/pwm.o
  .debug_frame     0x0006ca        0x18a build/default/production/mcc_generated_files/tmr1.o
- .debug_frame     0x000854        0x118 build/default/production/main.o
+ .debug_frame     0x000854        0x106 build/default/production/main.o
 
 .debug_str        0x000000        0x2f1
  *(.debug_str)
@@ -506,7 +504,7 @@ __FBTSEQ
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x5e6
+                  0x000000        0x5d9
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0xc2 build/default/production/mcc_generated_files/uart2.o
@@ -527,7 +525,7 @@ __FBTSEQ
  .debug_pubnames
                   0x0003f8        0x156 build/default/production/mcc_generated_files/tmr1.o
  .debug_pubnames
-                  0x00054e         0x98 build/default/production/main.o
+                  0x00054e         0x8b build/default/production/main.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -4173,11 +4171,11 @@ __c30_signature
  .nbss              0x1004          0x2 build/default/production/mcc_generated_files/tmr1.o
                     0x1004                  _TMR1_InterruptHandler
 
-.bss                0x1006         0x2c
+.bss                0x1006         0x2e
  .bss               0x1006         0x20 build/default/production/mcc_generated_files/traps.o
- .bss               0x1026          0xa build/default/production/main.o
+ .bss               0x1026          0xc build/default/production/main.o
                     0x1026                  _IR_Struct
- .bss               0x1030          0x2 build/default/production/mcc_generated_files/tmr1.o
+ .bss               0x1032          0x2 build/default/production/mcc_generated_files/tmr1.o
 
 .ivt._OscillatorFail
                   0x000004          0x2
@@ -4281,72 +4279,71 @@ __c30_signature
  .ivt._T1Interrupt
                   0x000016          0x2 build/default/production/mcc_generated_files/tmr1.o
 
-.text             0x00047a        0x6a4
- .text            0x00047a        0x198 build/default/production/main.o
+.text             0x00047a        0x726
+ .text            0x00047a        0x21a build/default/production/main.o
                   0x0004a6                  _TMR1_BitTime_Callback
                   0x0004b6                  _main
-                  0x000562                  _Init_IR_System
-                  0x000582                  _CARRIER_OFF
-                  0x00058e                  _CARRIER_ON
-                  0x00059a                  _send_bit
-                  0x000606                  _SEND_1
-                  0x00060c                  _SEND_0
- .text            0x000612        0x12c build/default/production/mcc_generated_files/reset.o
-                  0x000612                  _RESET_GetCause
-                  0x00061a                  _RESET_CauseHandler
-                  0x000736                  _RESET_CauseClearAll
- .text            0x00073e        0x126 build/default/production/mcc_generated_files/pwm.o
-                  0x00073e                  _PWM_Initialize
-                  0x0007b6                  _PWM_Generator1_CallBack
-                  0x0007bc                  _PWM_SetGenerator1InterruptHandler
-                  0x0007c8                  _PWM_EventA_CallBack
-                  0x0007ce                  _PWM_EventA_Tasks
-                  0x0007e2                  _PWM_EventB_CallBack
-                  0x0007e8                  _PWM_EventB_Tasks
-                  0x0007fc                  _PWM_EventC_CallBack
-                  0x000802                  _PWM_EventC_Tasks
-                  0x000816                  _PWM_EventD_CallBack
-                  0x00081c                  _PWM_EventD_Tasks
-                  0x000830                  _PWM_EventE_CallBack
-                  0x000836                  _PWM_EventE_Tasks
-                  0x00084a                  _PWM_EventF_CallBack
-                  0x000850                  _PWM_EventF_Tasks
- .text            0x000864         0xe2 build/default/production/mcc_generated_files/uart2.o
-                  0x000864                  _UART2_Initialize
-                  0x000894                  _UART2_Read
-                  0x0008b2                  _UART2_Write
-                  0x0008c8                  _UART2_IsRxReady
-                  0x0008dc                  _UART2_IsTxReady
-                  0x0008fc                  _UART2_IsTxDone
-                  0x000914                  _UART2_StatusGet
-                  0x00092e                  _UART2_Enable
-                  0x00093a                  _UART2_Disable
- .text            0x000946         0xb6 build/default/production/mcc_generated_files/tmr1.o
-                  0x000946                  _TMR1_Initialize
-                  0x000968                  _TMR1_Period16BitSet
-                  0x00097a                  _TMR1_Period16BitGet
-                  0x000982                  _TMR1_Counter16BitSet
-                  0x000994                  _TMR1_Counter16BitGet
-                  0x00099c                  _TMR1_CallBack
-                  0x0009a2                  _TMR1_SetInterruptHandler
-                  0x0009b2                  _TMR1_Start
-                  0x0009c2                  _TMR1_Stop
-                  0x0009cc                  _TMR1_GetElapsedThenClear
-                  0x0009e4                  _TMR1_SoftwareCounterGet
-                  0x0009f0                  _TMR1_SoftwareCounterClear
- .text            0x0009fc         0x7e build/default/production/mcc_generated_files/pin_manager.o
-                  0x0009fc                  _PIN_MANAGER_Initialize
- .text            0x000a7a         0x6e build/default/production/mcc_generated_files/clock.o
-                  0x000a7a                  _CLOCK_Initialize
-                  0x000ad0                  _CLOCK_AuxPllLockStatusGet
- .text            0x000ae8         0x36 build/default/production/mcc_generated_files/system.o
-                  0x000b06                  _SYSTEM_Initialize
+                  0x000600                  _Init_IR_System
+                  0x000620                  _CARRIER_OFF
+                  0x00062c                  _CARRIER_ON
+                  0x000638                  _SEND_1
+                  0x000666                  _SEND_0
+ .text            0x000694        0x12c build/default/production/mcc_generated_files/reset.o
+                  0x000694                  _RESET_GetCause
+                  0x00069c                  _RESET_CauseHandler
+                  0x0007b8                  _RESET_CauseClearAll
+ .text            0x0007c0        0x126 build/default/production/mcc_generated_files/pwm.o
+                  0x0007c0                  _PWM_Initialize
+                  0x000838                  _PWM_Generator1_CallBack
+                  0x00083e                  _PWM_SetGenerator1InterruptHandler
+                  0x00084a                  _PWM_EventA_CallBack
+                  0x000850                  _PWM_EventA_Tasks
+                  0x000864                  _PWM_EventB_CallBack
+                  0x00086a                  _PWM_EventB_Tasks
+                  0x00087e                  _PWM_EventC_CallBack
+                  0x000884                  _PWM_EventC_Tasks
+                  0x000898                  _PWM_EventD_CallBack
+                  0x00089e                  _PWM_EventD_Tasks
+                  0x0008b2                  _PWM_EventE_CallBack
+                  0x0008b8                  _PWM_EventE_Tasks
+                  0x0008cc                  _PWM_EventF_CallBack
+                  0x0008d2                  _PWM_EventF_Tasks
+ .text            0x0008e6         0xe2 build/default/production/mcc_generated_files/uart2.o
+                  0x0008e6                  _UART2_Initialize
+                  0x000916                  _UART2_Read
+                  0x000934                  _UART2_Write
+                  0x00094a                  _UART2_IsRxReady
+                  0x00095e                  _UART2_IsTxReady
+                  0x00097e                  _UART2_IsTxDone
+                  0x000996                  _UART2_StatusGet
+                  0x0009b0                  _UART2_Enable
+                  0x0009bc                  _UART2_Disable
+ .text            0x0009c8         0xb6 build/default/production/mcc_generated_files/tmr1.o
+                  0x0009c8                  _TMR1_Initialize
+                  0x0009ea                  _TMR1_Period16BitSet
+                  0x0009fc                  _TMR1_Period16BitGet
+                  0x000a04                  _TMR1_Counter16BitSet
+                  0x000a16                  _TMR1_Counter16BitGet
+                  0x000a1e                  _TMR1_CallBack
+                  0x000a24                  _TMR1_SetInterruptHandler
+                  0x000a34                  _TMR1_Start
+                  0x000a44                  _TMR1_Stop
+                  0x000a4e                  _TMR1_GetElapsedThenClear
+                  0x000a66                  _TMR1_SoftwareCounterGet
+                  0x000a72                  _TMR1_SoftwareCounterClear
+ .text            0x000a7e         0x7e build/default/production/mcc_generated_files/pin_manager.o
+                  0x000a7e                  _PIN_MANAGER_Initialize
+ .text            0x000afc         0x6e build/default/production/mcc_generated_files/clock.o
+                  0x000afc                  _CLOCK_Initialize
+                  0x000b52                  _CLOCK_AuxPllLockStatusGet
+ .text            0x000b6a         0x36 build/default/production/mcc_generated_files/system.o
+                  0x000b88                  _SYSTEM_Initialize
 
-.dinit            0x000b1e         0x28
- .dinit           0x000b1e         0x28 data_init
+.dinit            0x000ba0         0x28
+ .dinit           0x000ba0         0x28 data_init
 
-.text             0x000b46         0x32
- .text            0x000b46         0x1a build/default/production/mcc_generated_files/interrupt_manager.o
-                  0x000b46                  _INTERRUPT_Initialize
- .text            0x000b60         0x18 build/default/production/mcc_generated_files/traps.o
-                  0x000b60                  _TRAPS_halt_on_error
+.text             0x000bc8         0x32
+ .text            0x000bc8         0x1a build/default/production/mcc_generated_files/interrupt_manager.o
+                  0x000bc8                  _INTERRUPT_Initialize
+ .text            0x000be2         0x18 build/default/production/mcc_generated_files/traps.o
+                  0x000be2                  _TRAPS_halt_on_error
