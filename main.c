@@ -54,7 +54,8 @@
 #define ADDR_SIZE 16
 
 #define CMD_ON  0xC0 
-#define CMD_OFF 0x40 
+#define CMD_OFF 0x40
+#define ON_CARNAT 0x00F7C03F //addres is 00F7, cmd is  C0 for ON, then reversed cmd is 3F
 
 
 #define FCY 4000000
@@ -66,32 +67,39 @@
 #include "ir_remote.h"
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/pwm_module_features.h"
+#include "mcc_generated_files/uart2.h"
 
 typedef struct IR_Struct_t {
     IR_STATES_t IR_STATES;
-    uint8_t pause_train;
     uint8_t TMR_Elapsed_Count;
     uint8_t bits_remaining;
-    uint16_t addr;
-    uint8_t data;
-    uint8_t red;
-    uint8_t blue;
-    uint8_t green;
-
-
+    uint32_t full_frame;
+    uint8_t CMD;
+    uint8_t CMD_RX;
+    
 } IR_Struct_t;
 
 IR_Struct_t IR_Struct;
+bool change_cmd = false;
 
 void TMR1_BitTime_Callback() {
 
     IR_Struct.TMR_Elapsed_Count++;
-    if (IR_Struct.IR_STATES == IR_STATE_TRANSMIT_ADDR) {
-    }
-
-
+//    if (IR_Struct.IR_STATES == IR_STATE_TRANSMIT_ADDR) {
+//    }
 }
 
+void UART_CMD_Receive(){
+    while(!(U2STAHbits.URXBE == 1))
+      IR_Struct.CMD_RX = U2RXREG;
+    change_cmd = true;
+    
+}
+uint32_t create_data(uint32_t addr, uint32_t cmd){
+    uint32_t data_to_send  = 0;
+    data_to_send = addr<<16 | cmd<<8 | (uint8_t)(~cmd); //16-bit addres | CMD | Inversed CMD
+    return data_to_send;
+}
 void Init_IR_System();
 void CARRIER_ON();
 void CARRIER_OFF();
@@ -105,16 +113,28 @@ bool SEND_0();
 int main(void) {
     // initialize the device
     SYSTEM_Initialize();
-
+    UART2_SetRxInterruptHandler(UART_CMD_Receive);
     Init_IR_System();
 
 
     while (1) {
-
+        
+        if ( change_cmd == true  && IR_Struct.IR_STATES == IR_STATE_IDLE){
+            IR_Struct.CMD = IR_Struct.CMD_RX; //CMD should always have a CMD in it
+            IR_Struct.full_frame = create_data(LED_ADDR,IR_Struct.CMD);
+            change_cmd = false;
+            IR_Struct.IR_STATES = IR_STATE_START_HIGH;
+        }
+        
+        
         switch (IR_Struct.IR_STATES) {
             case IR_STATE_IDLE:
                 if (BTN_GetValue() == 0)
+                {   
+                    IR_Struct.full_frame = create_data(LED_ADDR,IR_Struct.CMD);
+                    __delay_ms(200); //fast SW debounce
                     IR_Struct.IR_STATES = IR_STATE_START_HIGH;
+                }
                 break;
 
             case IR_STATE_START_HIGH:
@@ -131,95 +151,126 @@ int main(void) {
                 if (IR_Struct.TMR_Elapsed_Count == IR_START_LOW_COUNT) {
                     TMR1_Stop();
                     IR_Struct.TMR_Elapsed_Count = 0;
-                    IR_Struct.bits_remaining = 16;
+                    IR_Struct.bits_remaining = 32;
                     IR_Struct.IR_STATES = IR_STATE_TRANSMIT_ADDR;
                 }
                 break;
+                
             case IR_STATE_TRANSMIT_ADDR:
                 if (IR_Struct.bits_remaining > 0) {
                    // volatile uint32_t local_addr = (uint32_t)IR_Struct.addr << (17 - IR_Struct.bits_remaining);
-                    if (((uint32_t)IR_Struct.addr << (17 - IR_Struct.bits_remaining)) & 0x10000){
+//                    if (((uint32_t)IR_Struct.addr << (17 - IR_Struct.bits_remaining)) & 0x10000){ // addr && 1<<pos (descrescator dfe la 16)) -aici cu for(pos >0; pos--))
+                    uint32_t masking_pos = (uint32_t)((uint32_t)1<<(uint32_t)((uint32_t)IR_Struct.bits_remaining -1));
+                    if ( IR_Struct.full_frame & masking_pos  ) {
                         CARRIER_ON();
-                        IR_Struct.IR_STATES = IR_STATE_TRANSMIT_1;
+                        IR_Struct.IR_STATES = IR_STATE_TRANSMIT_1_CARRIER;
                     }
-                    
                     else{
                         CARRIER_ON();
-                        IR_Struct.IR_STATES = IR_STATE_TRANSMIT_0;
+                        IR_Struct.IR_STATES = IR_STATE_TRANSMIT_0_CARRIER;
                     }
-                    IR_Struct.TMR_Elapsed_Count = 0;
+                    
                 }
                 else{
-                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_DATA;
-                    IR_Struct.bits_remaining = 8;
-                    IR_Struct.data = CMD_ON;
+                    IR_Struct.IR_STATES = IR_STATE_STOP;
+                    //IR_Struct.bits_remaining = 8;
+                    //IR_Struct.data = CMD_ON;
                 }
-                
+                IR_Struct.TMR_Elapsed_Count = 0;
                 break;
 
-            case IR_STATE_TRANSMIT_1:
-                if (SEND_1() == true) {
-                    IR_Struct.bits_remaining--;
-                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_ADDR; //aici e poroblema cand deja am trecut la send data - tot in ADR se duce
+            case IR_STATE_TRANSMIT_1_CARRIER:
+                if (IR_Struct.TMR_Elapsed_Count == 1)  //1 high //test another variable for already turned on
+                {   
+                    PWM_GeneratorDisable(PWM_GENERATOR_1);
+                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_1_WAIT; //aici e poroblema cand deja am trecut la send data - tot in ADR se duce
                 }
                 break;
-
-            case IR_STATE_TRANSMIT_0:
-                if (SEND_0() == true) {
-                    IR_Struct.bits_remaining--;
-                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_ADDR; //aici e poroblema cand deja am trecut la send data - tot in ADR se duce
-                }
-                break;
-            case IR_STATE_TRANSMIT_1_DATA:
-                if (SEND_1() == true) {
-                    IR_Struct.bits_remaining--;
-                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_DATA; //aici e poroblema cand deja am trecut la send data - tot in ADR se duce
-                }
-                break;
-
-            case IR_STATE_TRANSMIT_0_DATA:
-                if (SEND_0() == true) {
-                    IR_Struct.bits_remaining--;
-                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_DATA; //aici e poroblema cand deja am trecut la send data - tot in ADR se duce
-                }
-                break;
-               
-            case IR_STATE_TRANSMIT_DATA:
-                if (IR_Struct.bits_remaining > 0) {
-                   // volatile uint32_t local_addr = (uint32_t)IR_Struct.addr << (17 - IR_Struct.bits_remaining);
-                    if (((uint16_t)IR_Struct.data << (9 - IR_Struct.bits_remaining)) & 0x100){
-                        CARRIER_ON();
-                        IR_Struct.IR_STATES = IR_STATE_TRANSMIT_1;
+            case IR_STATE_TRANSMIT_1_WAIT:
+                 if (IR_Struct.TMR_Elapsed_Count == 4) //3 low  //alt sdtate amchine cat asteapta pana se face 4 din 1 trec in state machine
+                    {
+                        IR_Struct.TMR_Elapsed_Count = 0;
+                        TMR1_Stop();
+                        IR_Struct.bits_remaining--;
+                        IR_Struct.IR_STATES = IR_STATE_TRANSMIT_ADDR;
                     }
-                    
-                    else{
-                        CARRIER_ON();
-                        IR_Struct.IR_STATES = IR_STATE_TRANSMIT_0;
-                    }
-                    IR_Struct.TMR_Elapsed_Count = 0;
-                }
-                else
-                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_DATA_REVERSE; // I need reverse cumva
                 break;
+            case IR_STATE_TRANSMIT_0_CARRIER:
+                if (IR_Struct.TMR_Elapsed_Count == 1)  //1 high //test another variable for already turned on
+                {   
+                    PWM_GeneratorDisable(PWM_GENERATOR_1);
+                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_0_WAIT; //aici e poroblema cand deja am trecut la send data - tot in ADR se duce
+                }
+                break;
+            case IR_STATE_TRANSMIT_0_WAIT:
+                 if (IR_Struct.TMR_Elapsed_Count == 2) //3 low  //alt sdtate amchine cat asteapta pana se face 4 din 1 trec in state machine
+                     {
+                        IR_Struct.TMR_Elapsed_Count = 0;
+                        TMR1_Stop();
+                        IR_Struct.bits_remaining--;
+                        IR_Struct.IR_STATES = IR_STATE_TRANSMIT_ADDR;
+                     }
+                break;             
+//            case IR_STATE_TRANSMIT_DATA:
+//                if (IR_Struct.bits_remaining > 0) {
+//                   // volatile uint32_t local_addr = (uint32_t)IR_Struct.addr << (17 - IR_Struct.bits_remaining);
+//                    if (((uint16_t)IR_Struct.data << (9 - IR_Struct.bits_remaining)) & 0x100){
+//                        CARRIER_ON();
+//                        IR_Struct.IR_STATES = IR_STATE_TRANSMIT_1;
+//                    }
+//                    
+//                    else{
+//                        CARRIER_ON();
+//                        IR_Struct.IR_STATES = IR_STATE_TRANSMIT_0;
+//                    }
+//                    IR_Struct.TMR_Elapsed_Count = 0;
+//                }
+//                else
+//                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_DATA_REVERSE; // I need reverse cumva
+//                break;
+//                
+//            case IR_STATE_TRANSMIT_1_DATA:
+//                if (SEND_1() == true) {
+//                    IR_Struct.bits_remaining--;
+//                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_DATA; //aici e poroblema cand deja am trecut la send data - tot in ADR se duce
+//                }
+//                break;
+//
+//            case IR_STATE_TRANSMIT_0_DATA:
+//                if (SEND_0() == true) {
+//                    IR_Struct.bits_remaining--;
+//                    IR_Struct.IR_STATES = IR_STATE_TRANSMIT_DATA; //aici e poroblema cand deja am trecut la send data - tot in ADR se duce
+//                }
+//                break;
              case IR_STATE_STOP:
+                 CARRIER_ON();
+                 if(IR_Struct.TMR_Elapsed_Count == 1)
+                 {
+                     CARRIER_OFF();
+                     IR_Struct.IR_STATES = IR_STATE_IDLE;
+                 }
                  Nop();
             default:
                 break;
         }// Add your application code
     }
     return 1;
-}
 
+    
+}
 void Init_IR_System() {
 
     TMR1_SetInterruptHandler(&TMR1_BitTime_Callback);
     CARRIER_OFF();
-    IR_Struct.pause_train = 0;
+    
     IR_Struct.TMR_Elapsed_Count = 0;
     IR_Struct.IR_STATES = IR_STATE_IDLE;
-    IR_Struct.addr = LED_ADDR;
+    IR_Struct.CMD = 0xC0;
+    //IR_Struct.full_frame = 0x00F7C03F; //ON_CMD
 
-}
+
+        }
+
 
 void CARRIER_OFF() {
     TMR1_Stop();
@@ -232,31 +283,31 @@ void CARRIER_ON() {
 }
 
 
-bool SEND_1() {
-    bool status  = false;
-    if (IR_Struct.TMR_Elapsed_Count == 1) //1 high
-        PWM_GeneratorDisable(PWM_GENERATOR_1);
-    else if (IR_Struct.TMR_Elapsed_Count == 4){ //3 low 
-        IR_Struct.TMR_Elapsed_Count = 0;
-        TMR1_Stop();
-        status = true;
-    }
-    return status;
-}
-
-bool SEND_0() {
-
-    bool status  = false;
-    if (IR_Struct.TMR_Elapsed_Count == 1) //1 high
-        PWM_GeneratorDisable(PWM_GENERATOR_1);
-    else if (IR_Struct.TMR_Elapsed_Count == 2){ //3 low 
-        IR_Struct.TMR_Elapsed_Count = 0;
-        TMR1_Stop();
-        status = true;
-    }
-    return status;
-
-}
+//bool SEND_1() {
+//    bool status  = false;
+//    if (IR_Struct.TMR_Elapsed_Count == 1)  //1 high //test another variable for already turned on
+//        PWM_GeneratorDisable(PWM_GENERATOR_1);
+//    else if (IR_Struct.TMR_Elapsed_Count == 4){ //3 low  //alt sdtate amchine cat asteapta pana se face 4 din 1 trec in state machine
+//        IR_Struct.TMR_Elapsed_Count = 0;
+//        TMR1_Stop();
+//        status = true;
+//    }
+//    return status;
+//}
+//
+//bool SEND_0() {
+//
+//    bool status  = false;
+//    if (IR_Struct.TMR_Elapsed_Count == 1) //1 high
+//        PWM_GeneratorDisable(PWM_GENERATOR_1);
+//    else if (IR_Struct.TMR_Elapsed_Count == 2){ //3 low 
+//        IR_Struct.TMR_Elapsed_Count = 0;
+//        TMR1_Stop();
+//        status = true;
+//    }
+//    return status;
+//
+//}
 /**
  End of File
  */

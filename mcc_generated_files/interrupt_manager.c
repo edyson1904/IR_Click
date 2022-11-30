@@ -55,6 +55,18 @@ void INTERRUPT_Initialize (void)
     //    PWM1I: PWM Generator 1
     //    Priority: 1
         IPC16bits.PWM1IP = 1;
+    //    UEVTI: UART2 Event
+    //    Priority: 1
+        IPC47bits.U2EVTIP = 1;
+    //    UTXI: UART2 TX
+    //    Priority: 1
+        IPC7bits.U2TXIP = 1;
+    //    UEI: UART2 Error
+    //    Priority: 1
+        IPC12bits.U2EIP = 1;
+    //    URXI: UART2 RX
+    //    Priority: 1
+        IPC6bits.U2RXIP = 1;
     //    TI: Timer 1
     //    Priority: 1
         IPC0bits.T1IP = 1;
